@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Kisut from './components/table';
+
 import './App.css';
 
 class App extends Component {
+  state = {
+    kissat:[
+      {
+        id: 1,
+        title: 'Kissa 1',
+        src: 'https://placekitten.com/160/160',
+        alt: 'kissa',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+        view: 'https://placekitten.com/160/160'
+      },
+      {
+        id: 2,
+        title: 'Kissa 2',
+        src: 'https://placekitten.com/160/160',
+        alt: 'kissa',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+        view: 'https://placekitten.com/160/160'
+      },
+      {
+        id: 3,
+        title: 'Kissa 3',
+        src: 'https://placekitten.com/160/160',
+        alt: 'kissa',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+        view: 'https://placekitten.com/160/160'
+      }
+    ]
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+        <div className="App">
+        <Kisut kissat={this.state.kissat}/>
+    </div>
+  );
   }
 }
 
