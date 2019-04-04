@@ -1,12 +1,22 @@
-import React, { Component } from 'react';
-import KisuItem from './kisuapp';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Tr from './tr';
 
-class Kisut extends Component {
-  render() {
-    return this.props.kissat.map((kissa)=>(
-        <KisuItem key={kissa.id} kissa={kissa}/>
-  ));
-  }
-}
+const Table = (props) => {
+  const rows = props.picArray.map((item, i) => {
+    return <Tr key={i} pic={item}/>;
+  });
+  return (
+      <table>
+        <tbody>
+        {rows}
+        </tbody>
+      </table>
+  );
+};
 
-export default Kisut;
+Table.propTypes = {
+  picArray: PropTypes.array,
+};
+
+export default Table;

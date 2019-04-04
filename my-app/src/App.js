@@ -1,44 +1,36 @@
-import React, { Component } from 'react';
-import Kisut from './components/table';
-
-import './App.css';
+import React, {Component} from 'react';
+import Table from './components/table';
 
 class App extends Component {
+
+  apiUrl = 'http://media.mw.metropolia.fi/wbma/media/';
+
   state = {
-    kissat:[
-      {
-        id: 1,
-        title: 'Kissa 1',
-        src: 'https://placekitten.com/160/160',
-        alt: 'kissa',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-        view: 'https://placekitten.com/160/160'
-      },
-      {
-        id: 2,
-        title: 'Kissa 2',
-        src: 'https://placekitten.com/160/160',
-        alt: 'kissa',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-        view: 'https://placekitten.com/160/160'
-      },
-      {
-        id: 3,
-        title: 'Kissa 3',
-        src: 'https://placekitten.com/160/160',
-        alt: 'kissa',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-        view: 'https://placekitten.com/160/160'
-      }
-    ]
+    picArray: [],
+  };
+
+  componentDidMount() {
+    fetch(this.apiUrl).then(response => {
+      return response.json();
+    }).then(json => {
+      console.log(json);
+      return Promise.all(json.map(pic => {
+        return fetch(this.apiUrl + pic.file_id).then(response => {
+          return response.json();
+        });
+      })).then(pics => {
+        console.log(pics);
+        this.setState({picArray: pics});
+      });
+    });
   }
 
   render() {
     return (
-        <div className="App">
-        <Kisut kissat={this.state.kissat}/>
-    </div>
-  );
+        <div className="container">
+          <Table picArray={this.state.picArray}/>
+        </div>
+    );
   }
 }
 
